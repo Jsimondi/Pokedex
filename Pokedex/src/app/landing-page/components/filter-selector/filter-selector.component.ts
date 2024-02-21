@@ -7,10 +7,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./filter-selector.component.css']
 })
 export class FilterSelectorComponent {
-  @Output() typeEmitter = new EventEmitter;
+  @Output() filterEmitter = new EventEmitter;
   typeForm: FormGroup = new FormGroup({});
   limitSelector: number[] = [10, 20, 50, 100];
-  typeSelector: string[] = ["Bug", "Electric", "Flying", "Ice", "Rock", "Fairy", "Dark", "Fighting", "Grass", "Poison", "Steel", "Ghost", "Dragon", "Fire", "Ground", "Psychic", "Water", "Normal"]
+  typeSelector: string[] = ["All Types", "Bug", "Electric", "Flying", "Ice", "Rock", "Fairy", "Dark", "Fighting", "Grass", "Poison", "Steel", "Ghost", "Dragon", "Fire", "Ground", "Psychic", "Water", "Normal"]
 
   constructor(
     private formBuilder: FormBuilder
@@ -25,7 +25,7 @@ export class FilterSelectorComponent {
 
   }
 
-  emitType() {
-    this.typeEmitter.emit();
+  emitForm() {
+    this.filterEmitter.emit(this.typeForm.value);
   }
 }

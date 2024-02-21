@@ -1,12 +1,10 @@
 <div class="filter">
     <form [formGroup]="typeForm">
-        <div class="search-bar__icon">
-            <select formControlName="type">
-                <option *ngFor="let type of typeSelector">{{ type }}</option>
-            </select>
-            <select formControlName="limit">
-                <option *ngFor="let limit of limitSelector">{{ limit }}</option>
-            </select>
-        </div>
+        <select formControlName="type" class="filter__type">
+            <option *ngFor="let type of typeSelector">{{ type }}</option>
+        </select>
+        <select formControlName="limit" class="filter__limit">
+            <option *ngFor="let limit of limitSelector">{{ limit }}</option>
+        </select>
     </form>
 </div>

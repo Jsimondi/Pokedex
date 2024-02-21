@@ -1,1 +1,19 @@
-<p>pokemon-card works!</p>
+<div class="card">
+  <img src="{{ card.sprite }}" />
+  <div class="card__info">
+    <p class="card__info--name">{{ card.name }}</p>
+    <div>
+      <p class="card__info--type"
+        (click)="searchType(card.types.type_1.name)">
+        {{ card.types.type_1.name }}
+      </p>
+      <p
+        *ngIf="card.types.type_2"
+        class="card__info--type"
+        (click)="searchType(card.types.type_2.name)">
+        {{ card.types.type_2.name }}
+      </p>
+    </div>
+    <span class="card__info--id">#{{ card.id }}</span>
+  </div>
+</div>

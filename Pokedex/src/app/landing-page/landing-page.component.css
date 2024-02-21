@@ -11,9 +11,30 @@
 
     .content {
         display: flex;
+        flex-direction: column;
         width: 100%;
-        justify-content: center;
         padding: 16px;
         margin-top: 64px;
+
+        .filters {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 32px;
+        }
+
+        /* .cards-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 32px;
+        } */
+
+        .cards {
+            display: inline-flex;
+            flex-wrap: wrap;
+            break-after: inherit;
+            justify-content: space-between;
+        }
     }
 }
