@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchBarComponent } from './landing-page/components/search-bar/search-bar.component';
 import { PokemonCardComponent } from './landing-page/components/pokemon-card/pokemon-card.component';
 import { FilterSelectorComponent } from './landing-page/components/filter-selector/filter-selector.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FilterSelectorComponent } from './landing-page/components/filter-select
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

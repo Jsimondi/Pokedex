@@ -1,1 +1,12 @@
-<p>filter-selector works!</p>
+<div class="filter">
+    <form [formGroup]="typeForm">
+        <div class="search-bar__icon">
+            <select formControlName="type">
+                <option *ngFor="let type of typeSelector">{{ type }}</option>
+            </select>
+            <select formControlName="limit">
+                <option *ngFor="let limit of limitSelector">{{ limit }}</option>
+            </select>
+        </div>
+    </form>
+</div>
