@@ -1,1 +1,15 @@
-<p>landing-page works!</p>
+<div class="root">
+    <main class="content">
+        <div class="filters">
+            <app-search-bar></app-search-bar>
+            <app-filter-selector></app-filter-selector>
+        </div>
+        <div class="cards-wrapper">
+            <div class="cards">
+                <div *ngFor="let pokemon of pokemonsToShow">
+                    <app-pokemon-card></app-pokemon-card>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

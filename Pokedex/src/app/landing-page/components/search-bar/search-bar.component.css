@@ -1,0 +1,33 @@
+.search-bar {
+    width: 480px;
+    height: 42px;
+    background: white;
+    border: 2px solid gray;
+    border-radius: 8px;
+}
+
+input {
+    border: none;
+    display: flex;
+    height: 40px;
+    width: 80%;
+    margin-left: 8px;
+    border-radius: 8px;
+}
+
+input:active {
+    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    outline-offset: 0;
+    outline: 0;
+}
+
+input:focus-visible {
+    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    outline-offset: 0;
+    outline: 0;
+}
+
