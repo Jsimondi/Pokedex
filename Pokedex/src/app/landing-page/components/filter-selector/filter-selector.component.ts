@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Pokemon } from 'src/app/models/pokemon-models';
 
 @Component({
   selector: 'app-filter-selector',
@@ -7,15 +8,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./filter-selector.component.css']
 })
 export class FilterSelectorComponent {
-  @Output() filterEmitter = new EventEmitter;
-  typeForm: FormGroup = new FormGroup({});
+  @Input() allTypes: any[] = [];
+  @Output() typeEmitter = new EventEmitter;
+  @Output() limitEmitter = new EventEmitter;
+  filterForm: FormGroup;
   limitSelector: number[] = [10, 20, 50, 100];
-  typeSelector: string[] = ["All Types", "Bug", "Electric", "Flying", "Ice", "Rock", "Fairy", "Dark", "Fighting", "Grass", "Poison", "Steel", "Ghost", "Dragon", "Fire", "Ground", "Psychic", "Water", "Normal"]
+  typeSelector: string[] = ["All Types"]
 
   constructor(
     private formBuilder: FormBuilder
   ) {
-    this.typeForm = this.formBuilder.group({
+    this.filterForm = this.formBuilder.group({
       type: [],
       limit: 10
     })
@@ -25,7 +28,11 @@ export class FilterSelectorComponent {
 
   }
 
-  emitForm() {
-    this.filterEmitter.emit(this.typeForm.value);
+  typeChange() {
+    this.typeEmitter.emit(this.filterForm.value.type);
+  }
+
+  limitChange() {
+    this.limitEmitter.emit(this.filterForm.value.limit);
   }
 }

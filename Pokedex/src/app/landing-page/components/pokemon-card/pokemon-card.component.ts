@@ -18,5 +18,6 @@ export class PokemonCardComponent {
 
   searchType(typeName: string) {
     console.log("search type: ", typeName);
+    this.typeEmitter.emit(typeName);
   }
 }

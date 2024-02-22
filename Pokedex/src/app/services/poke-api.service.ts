@@ -59,17 +59,40 @@ export class PokeAPIService {
     );
   }
 
-  getPokemonByType(type: string, offset: number, limit: number) {
+  getPokemonByUrl(url: string): Observable<Pokemon> {
+    return this.httpClient.get<Pokemon>(url);
+  }
+
+  getAllTypes(): Observable<any> {
+    return this.httpClient.get<any>(`https://pokeapi.co/api/v2/type/`);
+  }
+
+  getPokemonByType(type: string) {
+    let requestArray: Observable<Pokemon>[] = new Array();
+    return this.httpClient.get(`https://pokeapi.co/api/v2/type/${type}`).pipe(
+      switchMap((typeResponse: any) => {
+        typeResponse.pokemon.forEach((element: any) => {
+          requestArray.push(this.httpClient.get<Pokemon>(element.pokemon.url))
+        })
+        return forkJoin(requestArray)
+      }),
+      map((requestedPokemons: any) =>
+        requestedPokemons.map(this.pokemonObjectParser)
+      )
+    )
+  }
+
+  getPokemonByTypePaginated(type: string, offset: number, limit: number) {
     let requestArray: Observable<Pokemon>[] = new Array();
     return this.httpClient
       .get<Pokemon[]>(`https://pokeapi.co/api/v2/type/${type}`)
       .pipe(
-        switchMap((requestedPokemons: any) => {
+        switchMap((typeResponse: any) => {
           // caso ultrapasse o tamanho do array
-          if (offset + limit > requestedPokemons.pokemon.length) {
-            limit = requestedPokemons.pokemon.length;
+          if (offset + limit > typeResponse.pokemon.length) {
+            limit = typeResponse.pokemon.length;
           }
-          requestedPokemons.pokemon
+          typeResponse.pokemon
             .slice(offset, limit)
             .forEach((pokemonList: PokemonTypeList) => {
               requestArray.push(this.httpClient.get<Pokemon>(pokemonList.pokemon.url));
@@ -80,6 +103,10 @@ export class PokeAPIService {
           requestedPokemons.map(this.pokemonObjectParser)
         )
       );
+  }
+
+  filterPokemonArray(arr: Pokemon[], offset: number, limit: number): Pokemon[] {
+    return arr.slice(offset, limit);
   }
 
   pokemonObjectParser(pokemon: any): Pokemon {
