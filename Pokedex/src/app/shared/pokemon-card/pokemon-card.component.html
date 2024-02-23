@@ -1,0 +1,24 @@
+<div class="card">
+  <img class="sprite" src="{{ card?.sprite }}" />
+  <div class="card__info">
+    <p class="card__info--name">{{ card?.name }}</p>
+    <div class="card__types">
+      <div class="icon-text {{card?.types?.type_1}}--background">
+        <img src="assets/type-icons/{{card?.types?.type_1}}.svg">
+        <p class="card__info--type "
+          (click)="searchType(card?.types?.type_1 ? card?.types?.type_1 : '')">
+          {{ card?.types?.type_1 }}
+        </p>
+      </div>
+      <div *ngIf="card?.types?.type_2" class="icon-text {{card?.types?.type_2}}--background">
+        <img src="assets/type-icons/{{card?.types?.type_2}}.svg">
+        <p
+          class="card__info--type {{card?.types?.type_2}}--background"
+          (click)="searchType(card?.types?.type_2 ? card?.types?.type_2 : '')">
+          {{ card?.types?.type_2 }}
+        </p>
+      </div>
+    </div>
+    <span class="card__info--id">#{{ card?.id }}</span>
+  </div>
+</div>

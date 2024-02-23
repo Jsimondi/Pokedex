@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    background: url(/assets/charizard-background.png);
+    background-size: cover;
+
+    font-family: Roboto;
+    color: #ffffff;
+}
+
+.root {
+    height: 100%;
+    width: 1024px;
+    display: flex;
+    margin: auto;
+    padding: 16px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 16px;
+    margin-top: 64px;
+}
+
+.cards {
+    display: inline-flex;
+    flex-wrap: wrap;
+    break-after: inherit;
+    justify-content: space-between;
+}
+
+.filters {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 32px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 8px;
+    margin-left: 8px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+   
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 8px;
+}
+
+$bug: #92BC2C;
+$dark: #595761;
+$dragon: #0C69C8;
+$electric: #F2D94E;
+$fire: #FBA54C;
+$fairy: #EE90E6;
+$fighting: #D3425F;
+$flying: #A1BBEC;
+$ghost: #5F6DBC;
+$grass: #5FBD58;
+$ground: #DA7C4D;
+$ice: #75D0C1;
+$normal: #A0A29F;
+$poison: #B763CF;
+$psychic: #FA8581;
+$rock: #C9BB8A;
+$steel: #5695A3;
+$water: #539DDF;
+
+.bug {
+    color: $bug;
+    &--background {
+        background: $bug;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $bug;
+    }
+}
+
+.dark {
+    color: $dark;
+    &--background {
+        background: $dark;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $dark;
+    }
+}
+
+.dragon {
+    color: $dragon;
+    &--background {
+        background: $dragon;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $dragon;
+    }
+}
+
+.electric {
+    color: $electric;
+    &--background {
+        background: $electric;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $electric;
+    }
+}
+
+.fire {
+    color: $fire;
+    &--background {
+        background: $fire;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $fire;
+    }
+}
+
+.fairy {
+    color: $fairy;
+    &--background {
+        background: $fairy;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $fairy;
+    }
+}
+
+.fighting {
+    color: $fighting;
+    &--background {
+        background: $fighting;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $fighting;
+    }
+}
+
+.flying {
+    color: $flying;
+    &--background {
+        background: $flying;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $flying;
+    }
+}
+
+.ghost {
+    color: $ghost;
+    &--background {
+        background: $ghost;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $ghost;
+    }
+}
+
+.grass {
+    color: $grass;
+    &--background {
+        background: $grass;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $grass;
+    }
+}
+
+.ground {
+    color: $ground;
+    &--background {
+        background: $ground;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $ground;
+    }
+}
+
+.ice {
+    color: $ice;
+    &--background {
+        background: $ice;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $ice;
+    }
+}
+
+.normal {
+    color: $normal;
+    &--background {
+        background: $normal;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $normal;
+    }
+}
+
+.poison {
+    color: $poison;
+    &--background {
+        background: $poison;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $poison;
+    }
+}
+
+.psychic {
+    color: $psychic;
+    &--background {
+        background: $psychic;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $psychic;
+    }
+}
+
+.rock {
+    color: $rock;
+    &--background {
+        background: $rock;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $rock;
+    }
+}
+
+.steel {
+    color: $steel;
+    &--background {
+        background: $steel;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $steel;
+    }
+}
+
+.water {
+    color: $water;
+    &--background {
+        background: $water;
+    }
+    &--shadow {
+        box-shadow: 0 0 8px $water;
+    }
+}

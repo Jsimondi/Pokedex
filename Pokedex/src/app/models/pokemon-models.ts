@@ -3,12 +3,8 @@ export class Pokemon {
   'name': string;
   'sprite': string;
   'types': {
-    type_1: {
-      name: string;
-    };
-    type_2: {
-      name: string;
-    } | null;
+    type_1: string
+    type_2: string | null
   };
 }
 

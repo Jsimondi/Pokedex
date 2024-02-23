@@ -4,15 +4,12 @@
             <app-search-bar></app-search-bar>
             <app-filter-selector [allTypes]="typesArray" (typeEmitter)="typeChange($event)" (limitEmitter)="limitChange($event)"></app-filter-selector>
         </div>
-        <!-- <div class="cards-wrapper"> -->
-            <!-- (scrolled)="onScroll()"  Adicionar diretiva para verificar scroll -->
         <div class="cards" >
             <app-pokemon-card
                 *ngFor="let pokemon of pokemonToShow"
-                (typeEmitter)="typeChange($event)"
+                (typeEmitter)="clickedNewType($event)"
                 [card]="pokemon"
             ></app-pokemon-card>
         </div>
-        <!-- </div> -->
     </main>
 </div>

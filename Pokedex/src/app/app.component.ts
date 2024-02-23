@@ -8,3 +8,4 @@ import { Pokemon } from './models/pokemon-models';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {}
+

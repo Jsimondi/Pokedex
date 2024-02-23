@@ -1,0 +1,13 @@
+<div class="root">
+    <main class="content">
+        <h1>Escolha um tipo de Pokemon:</h1>
+        <div class="types-display">
+            <div class="type" *ngFor="let type of typesToDisplay" title="{{type.name}}">
+                <label class="{{ type.name }}">{{ type.name }}</label>
+                <div class="type-wrapper {{type.name}}--background {{type.name}}--shadow" (click)="selectType(type.name)">
+                    <img src="{{ 'assets/type-icons/' + type.name + '.svg' }}">
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

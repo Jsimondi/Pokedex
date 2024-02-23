@@ -1,0 +1,42 @@
+.types-display {
+    margin: 64px;
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: repeat(6, 1fr);
+    align-content: center;
+    align-items: center;
+}
+
+.type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.type-wrapper {
+    border-radius: 16px;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    transition: 200ms all;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+label {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    padding: 8px;
+}
+
+img {
+    height: 60px;
+    width: 60px;
+}

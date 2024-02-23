@@ -7,17 +7,14 @@ import { Pokemon } from 'src/app/models/pokemon-models';
   styleUrls: ['./pokemon-card.component.css']
 })
 export class PokemonCardComponent {
-  @Input() card: Pokemon = new Pokemon()
+  @Input() card: Pokemon | null = new Pokemon()
   @Output() typeEmitter = new EventEmitter()
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
-
-  searchType(typeName: string) {
-    console.log("search type: ", typeName);
-    this.typeEmitter.emit(typeName);
+  searchType(typeName: string | undefined | null) {
+    typeName ? this.typeEmitter.emit(typeName) : null;
   }
 }

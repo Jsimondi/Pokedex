@@ -67,7 +67,7 @@ export class PokeAPIService {
     return this.httpClient.get<any>(`https://pokeapi.co/api/v2/type/`);
   }
 
-  getPokemonByType(type: string) {
+  getPokemonByType(type: string | null) {
     let requestArray: Observable<Pokemon>[] = new Array();
     return this.httpClient.get(`https://pokeapi.co/api/v2/type/${type}`).pipe(
       switchMap((typeResponse: any) => {
@@ -105,8 +105,20 @@ export class PokeAPIService {
       );
   }
 
-  filterPokemonArray(arr: Pokemon[], offset: number, limit: number): Pokemon[] {
-    return arr.slice(offset, limit);
+  limitPokemonArray(arr: Pokemon[], start: number, finish: number): Pokemon[] {
+    return arr.slice(start, finish);
+  }
+
+  filterPokemonArrayByTypes(arr: Pokemon[], type1: string, type2: string): (Pokemon | null)[] {
+    let filteredArray: Pokemon[] = [];
+    arr.forEach((pokemon: Pokemon) => {
+      const objValues = Object.values(pokemon.types);
+      if (objValues.includes(type1) && objValues.includes(type2)) {
+        filteredArray.push(pokemon);
+      }
+    })
+    console.log("filtered Array: ", filteredArray)
+    return filteredArray;
   }
 
   pokemonObjectParser(pokemon: any): Pokemon {
@@ -117,10 +129,8 @@ export class PokeAPIService {
         ? pokemon.sprites.other['official-artwork'].front_default
         : pokemon.sprites.front_default,
       types: {
-        type_1: {
-          name: pokemon.types[0].type.name,
-        },
-        type_2: pokemon.types[1] ? { name: pokemon.types[1].type.name } : null,
+        type_1: pokemon.types[0].type.name,
+        type_2: pokemon.types[1] ? pokemon.types[1].type.name : null,
       },
     };
   }
