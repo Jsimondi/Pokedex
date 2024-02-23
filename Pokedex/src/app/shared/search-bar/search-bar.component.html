@@ -1,5 +1,5 @@
 <div class="search-bar">
-    <div class="search-bar__text">
-        <input type="text" placeholder="Buscar Pokemon">
-    </div>
+    <form [formGroup]="searchBarForm" class="search-bar__text">
+        <input type="text" formControlName="search" placeholder="Buscar Pokemon" debounce="100">
+    </form>
 </div>

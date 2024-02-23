@@ -100,6 +100,16 @@ export class LandingPageComponent implements OnInit {
     this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
   }
 
+  searchPokemon(searchTerm: {search: string}) {
+    let searchArray: Pokemon[] = [];
+    this.pokemon.forEach((pokemon: Pokemon) => {
+      if (pokemon.name.includes(searchTerm.search)) {
+        searchArray.push(pokemon);
+      }
+    })
+    this.pokemonToShow = searchArray;
+  }
+
   next() {
     if (this.offset + this.limit > this.pokemon.length) {
       this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.pokemon.length)
