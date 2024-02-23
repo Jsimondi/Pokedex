@@ -12,8 +12,8 @@ import { of, switchMap, throwError } from 'rxjs';
 export class LandingPageComponent implements OnInit {
   offset: number = 0;
   limit: number = 10;
-  typeOffset: number = 0;
-  //typeLimit: number = 10;
+
+  loading: boolean = true;
   
   pokemon: Pokemon[] = [];
   pokemonToShow: (Pokemon | null)[] = [];
@@ -32,7 +32,6 @@ export class LandingPageComponent implements OnInit {
       types.results.forEach((type: any) => {
         this.typesArray.push(type.name);
       })
-      console.log("Snapshot: ", this.activatedRoute.snapshot)
       this.setTypes(this.activatedRoute.snapshot.queryParams);
       this.checkIfTypesExist();
       this.getPokemons();
@@ -40,31 +39,28 @@ export class LandingPageComponent implements OnInit {
   }
 
   getPokemons() {
+    this.loading = true;
     this.pokemonService.getPokemonByType(this.type).subscribe((res: Pokemon[]) => {
       this.pokemon = res;
       this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
-      console.log("Pokemons to show: ", this.pokemonToShow)
+      this.loading = false;
     })
   }
 
   checkIfTypesExist() {
     if (!this.type) {
-      console.log("caiu no primeiro if")
       this.router.navigate([``]);
     }
     else if (this.type && !this.typesArray.includes(this.type)) {
-      console.log("caiu no primeiro else if")
       this.router.navigate([``]);
     }
     else if (this.type && !this.secondaryType) {
-      console.log("caiu no segundo else if")
       this.router.navigate([`types`], {queryParams: {type1: this.type, limit: this.limit}});
       this.type = this.type;
       this.secondaryType = null;
       this.getPokemons();
     }
     else if (this.type && this.secondaryType && !this.typesArray.includes(this.secondaryType)) {
-      console.log("caiu no terceiro else if")
       this.router.navigate([`/types`], {queryParams: {type1: this.type, limit: this.limit}});
       this.secondaryType = null;
       this.getPokemons();

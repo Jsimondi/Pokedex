@@ -4,16 +4,19 @@
             <app-search-bar (searchEmitter)="searchPokemon($event)"></app-search-bar>
             <app-filter-selector [allTypes]="typesArray" (typeEmitter)="typeChange($event)" (limitEmitter)="limitChange($event)"></app-filter-selector>
         </div>
-        <div class="no-results" *ngIf="pokemonToShow.length === 0">
+        <div class="no-results" *ngIf="pokemonToShow.length === 0 && !loading">
             <img class="unknown" src="assets/unknown.png">
             <h2>Nenhum resultado encontrado</h2>
         </div>
-        <div *ngIf="pokemonToShow.length > 0" class="cards">
+        <div *ngIf="pokemonToShow.length > 0 && !loading" class="cards">
             <app-pokemon-card
                 *ngFor="let pokemon of pokemonToShow"
                 (typeEmitter)="clickedNewType($event)"
                 [card]="pokemon"
             ></app-pokemon-card>
+        </div>
+        <div *ngIf="loading" class="loading">
+            <app-loading-screen></app-loading-screen>
         </div>
     </main>
 </div>

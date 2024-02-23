@@ -5,6 +5,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { FilterSelectorComponent } from './filter-selector/filter-selector.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 
 
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SearchBarComponent,
     PokemonCardComponent,
     FilterSelectorComponent,
+    LoadingScreenComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SearchBarComponent,
     PokemonCardComponent,
     FilterSelectorComponent,
+    LoadingScreenComponent
   ]
 })
 export class SharedModule { }
