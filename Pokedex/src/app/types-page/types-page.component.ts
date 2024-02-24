@@ -17,7 +17,7 @@ export class TypesPageComponent {
 
   ngOnInit() {
     this.pokemonService.getAllTypes().subscribe(res => {
-      this.typesToDisplay = res.results.slice(0, res.results.length-2);
+      this.typesToDisplay = res.results;
     })
   }
 

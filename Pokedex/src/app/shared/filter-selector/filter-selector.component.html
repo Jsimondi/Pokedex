@@ -6,5 +6,11 @@
         <!-- <select formControlName="limit" class="filter__limit" (change)="limitChange()">
             <option *ngFor="let limit of limitSelector" value="{{limit}}">{{ limit }}</option>
         </select> -->
+        <div *ngFor="let type of allTypes" class="icon-text {{type}}--background" [ngClass]="isTypeSelected(type)" (click)="handleTypeClick(type)">
+            <img class="type-icon" src="assets/type-icons/{{type}}.svg">
+            <p class="type-name">
+              {{ type }}
+            </p>
+        </div>
     </form>
 </div>

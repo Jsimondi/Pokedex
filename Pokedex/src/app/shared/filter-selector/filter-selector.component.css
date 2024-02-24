@@ -1,14 +1,7 @@
 .filter {
     height: 46px;
-    width: 200px;
     display: flex;
     align-items: center;
-
-    form {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
 }
 
 .filter .filter__type {
@@ -21,4 +14,39 @@
     &:hover {
         cursor: pointer;
     }
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 4px 12px;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transform: scale(0.9);
+
+    &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+.type-name {
+    text-transform: capitalize;
+    margin-bottom: 0;
+    padding: 4px;
+    border-radius: 8px;
+    margin-block: 0;
+}
+
+.type-icon {
+    height: 24px;
+    padding: 4px;
+}
+
+.selected {
+    transform: scale(1.1);
 }

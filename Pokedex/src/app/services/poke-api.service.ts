@@ -64,7 +64,12 @@ export class PokeAPIService {
   }
 
   getAllTypes(): Observable<any> {
-    return this.httpClient.get<any>(`https://pokeapi.co/api/v2/type/`);
+    return this.httpClient.get<any>(`https://pokeapi.co/api/v2/type/`).pipe(
+      switchMap(types => {
+        types.results = types.results.slice(0, types.results.length - 2)
+        return of(types)
+      })
+    );
   }
 
   getPokemonByType(type: string | null) {
@@ -105,19 +110,25 @@ export class PokeAPIService {
       );
   }
 
-  limitPokemonArray(arr: Pokemon[], start: number, finish: number): Pokemon[] {
-    return arr.slice(start, finish);
+  limitPokemonArray(arr: Pokemon[] | null, start: number, finish: number): Pokemon[] {
+    if (arr) {
+      return arr.slice(start, finish);
+    } else {
+      return []
+    }
   }
 
-  filterPokemonArrayByTypes(arr: Pokemon[], type1: string, type2: string): (Pokemon | null)[] {
+  filterPokemonArrayByTypes(arr: Pokemon[], type1: string, type2: string): Pokemon[] {
     let filteredArray: Pokemon[] = [];
     arr.forEach((pokemon: Pokemon) => {
       const objValues = Object.values(pokemon.types);
-      if (objValues.includes(type1) && objValues.includes(type2)) {
+      if (type2 == '' && objValues.includes(type1)) {
+        filteredArray.push(pokemon);
+      }
+      else if (type1 && type2 && objValues.includes(type1) && objValues.includes(type2)) {
         filteredArray.push(pokemon);
       }
     })
-    console.log("filtered Array: ", filteredArray)
     return filteredArray;
   }
 

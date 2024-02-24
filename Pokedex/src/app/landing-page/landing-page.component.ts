@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { PokeAPIService } from '../services/poke-api.service';
 import { Pokemon } from '../models/pokemon-models';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
@@ -9,14 +9,14 @@ import { of, switchMap, throwError } from 'rxjs';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnChanges {
   offset: number = 0;
   limit: number = 10;
 
   loading: boolean = true;
   
   pokemon: Pokemon[] = [];
-  pokemonToShow: (Pokemon | null)[] = [];
+  pokemonToShow: Pokemon[] = [];
   typesArray: string[] = []
   type: string = "";
   secondaryType: string | null = null;
@@ -38,12 +38,19 @@ export class LandingPageComponent implements OnInit {
     })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes: ", changes)
+  }
+
   getPokemons() {
     this.loading = true;
     this.pokemonService.getPokemonByType(this.type).subscribe((res: Pokemon[]) => {
       this.pokemon = res;
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
+      this.pokemonToShow = this.pokemonService.filterPokemonArrayByTypes(this.pokemon, this.type, this.secondaryType ? this.secondaryType : '');
+      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemonToShow, this.offset, this.limit);
       this.loading = false;
+      console.log("pokemons: ", this.pokemon);
+      console.log("pokemonToShow: ", this.pokemonToShow);
     })
   }
 
@@ -84,16 +91,19 @@ export class LandingPageComponent implements OnInit {
     this.getPokemons()
   }
 
-  typeChange(event: string) {
-    this.secondaryType = event;
+  filterChange(event: {type1: string, type2: string, limit: number}) {
+    console.log("event: ", event);
+    this.type = event.type1;
+    this.secondaryType = event.type2;
+    this.limit = event.limit;
     this.router.navigate([`types`], {queryParams: { type1: this.type, type2: this.secondaryType, limit: this.limit }})
-    this.pokemonToShow = this.pokemonService.filterPokemonArrayByTypes(this.pokemon, this.type, this.secondaryType);
+    this.getPokemons();
+    // this.pokemonToShow = this.pokemonService.filterPokemonArrayByTypes(this.pokemon, this.type, this.secondaryType);
   }
 
   limitChange(event: any) {
-    console.log("event: ", event);
-    this.limit = event;
-    this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
+    // this.limit = event;
+    // this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
   }
 
   searchPokemon(searchTerm: {search: string}) {
