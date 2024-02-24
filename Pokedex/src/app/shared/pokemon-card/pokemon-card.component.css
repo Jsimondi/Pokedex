@@ -16,9 +16,9 @@
     } */
 
     .sprite {
-        height: 100px;
-        width: 100px;
-        padding: 32px 0px 0px 0px;
+        height: 140px;
+        width: 140px;
+        padding-top: 8px;
     }
 
     p {
@@ -41,14 +41,18 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 95%;
-    padding: 8px 0;
+    width: calc(100% - 16px);
+    padding: 8px;
     justify-content: space-between;
+}
+
+.card .card__info .card__info--type {
+    margin-right: 8px;
 }
 
 .card .card__info .card__info--name {
     font-size: 1.3rem;
-    margin-top: 12px;
+    align-self: center;
 }
 
 .card .card__types {
@@ -59,13 +63,16 @@
 
 .icon-text {
     display: flex;
-    height: 24px;
+    height: 28px;
+    width: 100px;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 8px;
 
     img {
         height: 16px;
         width: 16px;
-        padding: 4px;
+        padding: 0px 8px;
         margin: 0;
     }
 }

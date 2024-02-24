@@ -1,8 +1,8 @@
 <div class="root">
     <main class="content">
         <div class="filters">
-            <app-search-bar (searchEmitter)="searchPokemon($event)"></app-search-bar>
             <app-filter-selector [allTypes]="typesArray" (typeEmitter)="filterChange($event)" (limitEmitter)="limitChange($event)"></app-filter-selector>
+            <app-search-bar (searchEmitter)="searchPokemon($event)"></app-search-bar>
         </div>
         <div class="no-results" *ngIf="pokemonToShow.length === 0 && !loading">
             <img class="unknown" src="assets/unknown.png">

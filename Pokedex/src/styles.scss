@@ -12,36 +12,6 @@ body {
     color: #ffffff;
 }
 
-.root {
-    height: 100%;
-    width: 1024px;
-    display: flex;
-    margin: auto;
-    padding: 16px;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 16px;
-    margin-top: 64px;
-}
-
-.cards {
-    display: inline-flex;
-    flex-wrap: wrap;
-    break-after: inherit;
-    justify-content: space-between;
-}
-
-.filters {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 32px;
-}
-
 /* width */
 ::-webkit-scrollbar {
     width: 8px;
