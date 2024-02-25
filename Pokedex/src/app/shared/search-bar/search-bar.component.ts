@@ -21,7 +21,7 @@ export class SearchBarComponent {
   }
 
   ngOnInit() {
-    const searchChanges = this.searchBarForm.valueChanges.pipe(
+    this.searchBarForm.valueChanges.pipe(
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(res => {

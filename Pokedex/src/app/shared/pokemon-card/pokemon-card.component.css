@@ -24,7 +24,7 @@
     p {
         text-transform: capitalize;
         margin-bottom: 0;
-        padding: 4px;
+        /* padding: 4px; */
         border-radius: 8px;
         margin-block: 0;
     }
@@ -47,7 +47,7 @@
 }
 
 .card .card__info .card__info--type {
-    margin-right: 8px;
+    /* margin-right: 8px; */
 }
 
 .card .card__info .card__info--name {
@@ -65,7 +65,7 @@
     display: flex;
     height: 28px;
     width: 100px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-radius: 8px;
 

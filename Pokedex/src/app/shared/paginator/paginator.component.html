@@ -1,0 +1,5 @@
+<div class="wrapper">
+    <i class="material-icons" (click)="emitNextOrBack('back')">navigate_before</i>
+    <div *ngFor="let page of pagesToShow" (click)="emitPage(page)">{{ page + 1 }}</div>
+    <i class="material-icons" (click)="emitNextOrBack('next')">navigate_next</i>
+</div>

@@ -110,8 +110,9 @@ export class PokeAPIService {
       );
   }
 
-  limitPokemonArray(arr: Pokemon[] | null, start: number, finish: number): Pokemon[] {
+  limitPokemonArray(arr: Pokemon[] | null, start: number, limit: number): Pokemon[] {
     if (arr) {
+      let finish = Number(start) + Number(limit)
       return arr.slice(start, finish);
     } else {
       return []

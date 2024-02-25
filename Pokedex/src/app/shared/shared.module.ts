@@ -6,6 +6,7 @@ import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { FilterSelectorComponent } from './filter-selector/filter-selector.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 
 
@@ -16,6 +17,7 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     PokemonCardComponent,
     FilterSelectorComponent,
     LoadingScreenComponent,
+    PaginatorComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     SearchBarComponent,
     PokemonCardComponent,
     FilterSelectorComponent,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    PaginatorComponent
   ]
 })
 export class SharedModule { }

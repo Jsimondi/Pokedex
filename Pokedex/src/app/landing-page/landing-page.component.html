@@ -15,6 +15,7 @@
                 [card]="pokemon"
             ></app-pokemon-card>
         </div>
+        <app-paginator *ngIf="pokemonToShow.length > 0 && !loading" [offset]="this.offset" [limit]="this.limit" [length]="this.pokemon.length" (pageChangeEmitter)="goToPage($event)" (nextOrBackEmitter)="nextOrBackEvent($event)"></app-paginator>
         <div *ngIf="loading" class="loading">
             <app-loading-screen></app-loading-screen>
         </div>

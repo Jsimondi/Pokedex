@@ -6,10 +6,18 @@ body {
     overflow: hidden;
 
     background: url(/assets/charizard-background.png);
+    // background: url(/assets/background5-light.png);
+    // background: url(/assets/background5-dark.png);
     background-size: cover;
 
     font-family: Roboto;
     color: #ffffff;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* width */

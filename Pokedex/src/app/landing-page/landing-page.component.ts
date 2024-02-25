@@ -34,7 +34,7 @@ export class LandingPageComponent implements OnInit {
       })
       this.setTypes(this.activatedRoute.snapshot.queryParams);
       this.checkIfTypesExist();
-      this.getPokemons();
+      //this.getPokemons();
     })
   }
 
@@ -45,6 +45,7 @@ export class LandingPageComponent implements OnInit {
       this.pokemonToShow = this.pokemonService.filterPokemonArrayByTypes(this.pokemon, this.type, this.secondaryType ? this.secondaryType : '');
       this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemonToShow, this.offset, this.limit);
       this.loading = false;
+      console.log("pokemon: ", this.pokemon)
     })
   }
 
@@ -109,21 +110,40 @@ export class LandingPageComponent implements OnInit {
   }
 
   next() {
-    if (this.offset + this.limit > this.pokemon.length) {
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.pokemon.length)
+    console.log("next!");
+    if (Number(this.offset) + Number(this.limit) > this.pokemon.length) {
+      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
     } else {
-      this.offset += this.limit;
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit)
+      this.offset += Number(this.limit);
+      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
     }
   }
 
   back() {
-    if (this.offset - this.limit < 0) {
+    if (Number(this.offset) - Number(this.limit) < 0) {
       this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, 0, this.limit)
     } else {
-      this.offset -= this.limit;
+      this.offset -= Number(this.limit);
       this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit)
     }
+  }
+
+  nextOrBackEvent(event: string) {
+    console.log("event: ", event);
+    switch(event) {
+      case 'next':
+        this.next();
+        break;
+      case 'back':
+        this.back();
+        break;
+    }
+  }
+
+  goToPage(page: number) {
+    console.log("page: ", page);
+    this.offset = page*this.limit;
+    this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit)
   }
 
   onScroll(): void {
