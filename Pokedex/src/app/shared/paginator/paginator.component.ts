@@ -19,7 +19,6 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes: ", changes);
     this.pagesToShow = [];
     changes['length'] ? this.length = changes['length'].currentValue : null;
     changes['offset'] ? this.offset = changes['offset'].currentValue : null;
