@@ -5,14 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { MainPage } from './main-page/main-page.component';
 import { SharedModule } from './shared/shared.module';
 import { TypesPageComponent } from './types-page/types-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
+    MainPage,
     TypesPageComponent
   ],
   imports: [

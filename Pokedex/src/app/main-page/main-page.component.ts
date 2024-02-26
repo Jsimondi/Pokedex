@@ -5,11 +5,11 @@ import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { of, switchMap, throwError } from 'rxjs';
 
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.css']
+  selector: 'app-main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.css']
 })
-export class LandingPageComponent implements OnInit {
+export class MainPage implements OnInit {
   offset: number = 0;
   limit: number = 10;
 
