@@ -23,9 +23,11 @@
 
 .button:hover {
     background: rgb(100, 100, 100);
+    color: white;
     cursor: pointer;
 }
 
 .button--selected {
     background: rgb(100, 100, 100) !important;
+    color: white;
 }
