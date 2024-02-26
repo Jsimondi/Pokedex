@@ -13,6 +13,7 @@
 .content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     padding: 16px;
     margin-top: 64px;
@@ -43,7 +44,8 @@
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         width: 100%;
-        grid-gap: 8px;
+        height: 100%;
+        grid-gap: 0px 8px;
         overflow-y: auto;
         margin-top: 16px;
     }

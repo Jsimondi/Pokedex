@@ -21,6 +21,10 @@ export class LandingPageComponent implements OnInit {
   type: string = "";
   secondaryType: string | null = null;
 
+  searchingPokemon: boolean = false;
+  searchedPokemonArray: Pokemon[] = [];
+  filteredPokemonArray: Pokemon[] = [];
+
   constructor(
     private pokemonService: PokeAPIService,
     private activatedRoute: ActivatedRoute,
@@ -40,12 +44,20 @@ export class LandingPageComponent implements OnInit {
 
   getPokemons() {
     this.loading = true;
+    this.offset = 0;
+    this.searchingPokemon = false;
+    this.searchedPokemonArray = [];
     this.pokemonService.getPokemonByType(this.type).subscribe((res: Pokemon[]) => {
       this.pokemon = res;
-      this.pokemonToShow = this.pokemonService.filterPokemonArrayByTypes(this.pokemon, this.type, this.secondaryType ? this.secondaryType : '');
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemonToShow, this.offset, this.limit);
+      this.filteredPokemonArray = this.pokemonService.filterPokemonArrayByTypes(this.pokemon, this.type, this.secondaryType ? this.secondaryType : '');
+      if (this.secondaryType) {
+        this.searchingPokemon = true;
+        this.searchedPokemonArray = this.pokemonToShow;
+      } else {
+        this.searchedPokemonArray = [];
+      }
+      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.filteredPokemonArray, this.offset, this.limit);
       this.loading = false;
-      console.log("pokemon: ", this.pokemon)
     })
   }
 
@@ -72,10 +84,11 @@ export class LandingPageComponent implements OnInit {
   setTypes(params: Params) {
     this.type = params["type1"];
     params["type2"] ? this.secondaryType = params["type2"] : this.secondaryType = null;
-    if (this.secondaryType) {
-      this.pokemonToShow = this.pokemonService.filterPokemonArrayByTypes(this.pokemon, this.type, this.secondaryType);
-    }
     params["limit"] ? this.limit = params["limit"] : this.limit = 10;
+    this.getPokemons();
+    if (this.secondaryType) {
+      this.searchedPokemonArray = this.pokemon
+    }
   }
 
   clickedNewType(event: string) {
@@ -94,42 +107,69 @@ export class LandingPageComponent implements OnInit {
     this.getPokemons();
   }
 
-  limitChange(event: any) {
-    // this.limit = event;
-    // this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
-  }
-
   searchPokemon(searchTerm: {search: string}) {
-    let searchArray: Pokemon[] = [];
-    this.pokemon.forEach((pokemon: Pokemon) => {
-      if (pokemon.name.includes(searchTerm.search)) {
-        searchArray.push(pokemon);
+    this.offset = 0;
+    this.searchedPokemonArray = [];
+    if (searchTerm.search == '') {
+      this.searchingPokemon = false;
+      this.pokemonToShow = this.filteredPokemonArray;
+      if (this.secondaryType) {
+        this.pokemonToShow = this.filteredPokemonArray;
+        this.searchedPokemonArray = this.pokemonToShow
+      } else {
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, 0, this.limit);
+        this.searchedPokemonArray = [];
       }
-    })
-    this.pokemonToShow = searchArray;
+    } else {
+      this.searchingPokemon = true;
+      let searchArray: Pokemon[] = [];
+      this.pokemon.forEach((pokemon: Pokemon) => {
+        if (pokemon.name.includes(searchTerm.search)) {
+          searchArray.push(pokemon);
+        }
+      })
+      this.searchedPokemonArray = searchArray;
+      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.searchedPokemonArray, 0, this.limit);
+    }
   }
 
   next() {
-    console.log("next!");
-    if (Number(this.offset) + Number(this.limit) > this.pokemon.length) {
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
+    if (this.searchingPokemon) {
+      if (Number(this.offset) + Number(this.limit) > this.searchedPokemonArray.length) {
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.searchedPokemonArray, this.offset, this.limit);
+      } else {
+        this.offset += Number(this.limit);
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.searchedPokemonArray, this.offset, this.limit);
+      }
     } else {
-      this.offset += Number(this.limit);
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
+      if (Number(this.offset) + Number(this.limit) > this.pokemon.length) {
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
+      } else {
+        this.offset += Number(this.limit);
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit);
+      }
     }
   }
 
   back() {
-    if (Number(this.offset) - Number(this.limit) < 0) {
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, 0, this.limit)
+    if (this.searchingPokemon) {
+      if (Number(this.offset) - Number(this.limit) < 0) {
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.searchedPokemonArray, 0, this.limit)
+      } else {
+        this.offset -= Number(this.limit);
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.searchedPokemonArray, this.offset, this.limit)
+      }
     } else {
-      this.offset -= Number(this.limit);
-      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit)
+      if (Number(this.offset) - Number(this.limit) < 0) {
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, 0, this.limit)
+      } else {
+        this.offset -= Number(this.limit);
+        this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit)
+      }
     }
   }
 
   nextOrBackEvent(event: string) {
-    console.log("event: ", event);
     switch(event) {
       case 'next':
         this.next();
@@ -141,13 +181,16 @@ export class LandingPageComponent implements OnInit {
   }
 
   goToPage(page: number) {
-    console.log("page: ", page);
     this.offset = page*this.limit;
-    this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit)
+    if (this.searchingPokemon) {
+      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.searchedPokemonArray, this.offset, this.limit);
+    } else {
+      this.pokemonToShow = this.pokemonService.limitPokemonArray(this.pokemon, this.offset, this.limit)
+    }
   }
 
-  onScroll(): void {
-    console.log("scrolled");
-    this.offset += 10;
-  }
+  // onScroll(): void {
+  //   console.log("scrolled");
+  //   this.offset += 10;
+  // }
 }

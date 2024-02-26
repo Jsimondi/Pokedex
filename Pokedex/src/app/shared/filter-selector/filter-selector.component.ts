@@ -12,7 +12,6 @@ export class FilterSelectorComponent {
   @Output() typeEmitter = new EventEmitter;
   @Output() limitEmitter = new EventEmitter;
   filterForm: FormGroup;
-  limitSelector: number[] = [10, 20, 50, 100];
 
   type: string = '';
   secondaryType: string = '';

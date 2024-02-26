@@ -1,5 +1,9 @@
 <div class="wrapper">
-    <i class="material-icons" (click)="emitNextOrBack('back')">navigate_before</i>
-    <div *ngFor="let page of pagesToShow" (click)="emitPage(page)">{{ page + 1 }}</div>
-    <i class="material-icons" (click)="emitNextOrBack('next')">navigate_next</i>
+    <button class="button" (click)="emitNextOrBack('back')">
+        <i class="material-icons icon">navigate_before</i>
+    </button>
+    <button class="button" [ngClass]="{'button--selected' : selectedPage === page}" *ngFor="let page of pagesToShow" (click)="emitPage(page)">{{ page + 1 }}</button>
+    <button class="button" (click)="emitNextOrBack('next')">
+        <i class="material-icons icon">navigate_next</i>
+    </button>
 </div>

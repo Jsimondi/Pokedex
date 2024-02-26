@@ -1,12 +1,6 @@
 <div class="filter">
     <h2>Filter for one or two types:</h2>
     <form [formGroup]="filterForm">
-        <!-- <select formControlName="type" class="filter__type" (change)="typeChange()">
-            <option *ngFor="let type of typeSelector" value="{{type}}">{{ type }}</option>
-        </select> -->
-        <!-- <select formControlName="limit" class="filter__limit" (change)="limitChange()">
-            <option *ngFor="let limit of limitSelector" value="{{limit}}">{{ limit }}</option>
-        </select> -->
         <div *ngFor="let type of allTypes" class="icon-text {{type}}--background" [ngClass]="isTypeSelected(type)" (click)="handleTypeClick(type)">
             <img class="type-icon" src="assets/type-icons/{{type}}.svg">
             <p class="type-name">
