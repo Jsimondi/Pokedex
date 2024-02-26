@@ -1,9 +1,9 @@
 # Pokedex Project
 This is a study project / activity proposed by [IPMedia](https://ipmedia.com.br). The idea is to consume the [PokeAPI](https://pokeapi.co) and display multiple pokemons by their type. I've delved a bit deeper and tried to set a couple other functionalities to expand and test my abilities on Angular development.
 
-![Image1] (https://github.com/Jsimondi/Pokedex/tree/main/Pokedex/src/assets/github/Pokedex1.PNG?raw=true "Landing Page")
+![Image1] (https://github.com/Jsimondi/Pokedex/tree/main/Pokedex/src/assets/github/Pokedex1.PNG?raw=true)
 
-![Image2] (https://github.com/Jsimondi/Pokedex/tree/main/Pokedex/src/assets/github/Pokedex2.PNG?raw=true "Main Page")
+![Image2] (https://github.com/Jsimondi/Pokedex/tree/main/Pokedex/src/assets/github/Pokedex2.PNG?raw=true)
 
 
 ### Running the project
