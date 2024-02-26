@@ -1,30 +1,30 @@
 <div class="root">
-    <main class="content">
-        <div class="filters">
-            <app-filter-selector [allTypes]="typesArray" (typeEmitter)="filterChange($event)"></app-filter-selector>
-            <app-search-bar (searchEmitter)="searchPokemon($event)"></app-search-bar>
-        </div>
-        <div class="no-results" *ngIf="pokemonToShow.length === 0 && !loading">
-            <img class="unknown" src="assets/unknown.png">
-            <h2>Nenhum resultado encontrado</h2>
-        </div>
-        <div *ngIf="pokemonToShow.length > 0 && !loading" class="cards">
-            <app-pokemon-card
-                *ngFor="let pokemon of pokemonToShow"
-                (typeEmitter)="clickedNewType($event)"
-                [card]="pokemon"
-            ></app-pokemon-card>
-        </div>
-        <app-paginator
-            *ngIf="pokemonToShow.length > 0 && !loading"
-            [offset]="offset"
-            [limit]="limit"
-            [length]="searchingPokemon ? searchedPokemonArray.length : pokemon.length"
-            (pageChangeEmitter)="goToPage($event)"
-            (nextOrBackEmitter)="nextOrBackEvent($event)"
-        ></app-paginator>
-        <div *ngIf="loading" class="loading">
-            <app-loading-screen></app-loading-screen>
-        </div>
-    </main>
+  <main class="content">
+    <div class="filters">
+      <app-filter-selector
+        [allTypes]="typesArray"
+        (typeEmitter)="filterChange($event)"></app-filter-selector>
+      <app-search-bar (searchEmitter)="searchPokemon($event)"></app-search-bar>
+    </div>
+    <div class="no-results" *ngIf="pokemonToShow.length === 0 && !loading">
+      <img class="unknown" src="assets/unknown.png" />
+      <h2>Nenhum resultado encontrado</h2>
+    </div>
+    <div *ngIf="pokemonToShow.length > 0 && !loading" class="cards">
+      <app-pokemon-card
+        *ngFor="let pokemon of pokemonToShow"
+        (typeEmitter)="clickedNewType($event)"
+        [card]="pokemon"></app-pokemon-card>
+    </div>
+    <app-paginator
+      *ngIf="pokemonToShow.length > 0 && !loading"
+      [offset]="offset"
+      [limit]="limit"
+      [length]="searchingPokemon ? searchedPokemonArray.length : pokemon.length"
+      (pageChangeEmitter)="goToPage($event)"
+      (nextOrBackEmitter)="nextOrBackEvent($event)"></app-paginator>
+    <div *ngIf="loading" class="loading">
+      <app-loading-screen></app-loading-screen>
+    </div>
+  </main>
 </div>
