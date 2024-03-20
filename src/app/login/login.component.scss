@@ -1,0 +1,8 @@
+.login-display {
+  margin: 64px;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(6, 1fr);
+  align-content: center;
+  align-items: center;
+}
