@@ -7,7 +7,7 @@ import { of, switchMap, throwError } from 'rxjs';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css'],
+  styleUrls: ['./main-page.component.scss'],
 })
 export class MainPage implements OnInit {
   offset: number = 0;
