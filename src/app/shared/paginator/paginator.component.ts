@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.css']
+  styleUrls: ['./paginator.component.scss']
 })
 export class PaginatorComponent implements OnInit, OnChanges {
   @Input() offset: number = 0;
@@ -15,7 +15,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
   pagesToShow: number[] = [];
 
   ngOnInit() {
-    
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
